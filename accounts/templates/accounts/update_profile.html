@@ -1,0 +1,46 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body>
+
+<br> <br>
+
+<div class="container col-md-6 d-flex shadow-md p-5 form-layout card">
+
+<h1> <i class="fa fa-user" aria-hidden="true"></i> &nbsp; Update Profile </h1>
+
+<br>
+
+<form action="" method="post">
+
+    {% csrf_token %}
+
+    {{ user_form.username | as_crispy_field }}
+    <br> 
+    {{ user_form.email | as_crispy_field }}
+    <br>
+
+    <br> 
+
+    <button type="submit" class="btn btn-lg navbar-btn w-100  p-2 text-white" style="background-color: #AF8260;"> &nbsp; Update </button>
+    <br><br>
+
+    <button  type="submit" class="btn navbar-btn btn-lg w-100  p-2 text-white" style="background-color: #A02334;"> &nbsp; Delete your account </button>
+
+</form>
+
+</div>
+
+<br>
+
+ <br>
+
+</body>
+
+
+{% endblock  %}

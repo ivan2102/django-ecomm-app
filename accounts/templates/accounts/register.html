@@ -1,0 +1,55 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body>
+
+<br> <br>
+
+<div class="container col-md-6 d-flex shadow-md p-5 form-layout card">
+
+<h1>Register your account </h1>
+
+<hr>
+
+<br>
+
+<form action="" method="post">
+
+    {% csrf_token %}
+
+    {{ form.username | as_crispy_field }}
+    <br>
+    {{ form.email | as_crispy_field }}
+    <br> 
+    {{ form.password1 | as_crispy_field }}
+    <br>
+    {{ form.password2 | as_crispy_field }}
+
+    <br>
+
+    <button type="submit" class="btn btn-lg w-100 btn-block p-2 text-white" style="background-color: #AF8260;"> &nbsp; Register</button>
+
+    <br><br>
+
+    <div class="text-center">
+    <a style="text-decoration: none" href="{% url 'login' %} ">Already have an account? </a>
+    </div>
+</form>
+
+</div>
+
+<br> <br>
+
+</body>
+
+
+
+
+
+
+{% endblock  %}

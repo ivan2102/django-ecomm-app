@@ -1,0 +1,106 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% load tz %} 
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="container">
+      <!-- Title -->
+      <div class="d-flex justify-content-between align-items-center py-3">
+        <h2 class="h5 mb-0"><a href="#" class="text-muted"></a>Thank you for your order! We hope  you’ll love it. </h2>
+        
+      </div>
+    
+      <!-- Main content -->
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Details -->
+          <div class="card border-dark mb-4">
+            <div class="card-body">
+              <div class="mb-3 d-flex justify-content-between">
+                <div>
+                 
+                  <span class="me-3">Order Date : {% now "Y-m-d" %}  </p> <br>
+                  
+                  <span class="badge rounded-pill bg-info">SHIPPING</span>
+                </div>
+                <div class="d-flex">
+                 
+                 
+                </div>
+              </div>
+              <table class="table table-striped table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th style="text-align: center;">Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                  <tr>
+                    <td>
+                      <div class="d-flex mb-2">
+                        <div class="flex-shrink-0">
+                          <img src="#" alt="" width="35" class="img-fluid mr-2">
+                        </div>
+                        <div class="flex-lg-grow-1 ms-3">
+                          <h6 class="small mb-0"><a href="#" class="text-reset" style="text-decoration: none;">{{ order.product }}</a></h6>
+                          
+                        
+                        </div>
+                      </div>
+                    </td>
+                    <td style="text-align: center;">{{ order.quantity }}</td>
+                    <td>${{ order.price }}</td>
+                   
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                
+                  <tr class="fw-bold">
+                    <td colspan="2">TOTAL</td>
+                    <td>$ {{ cart.total_price }} </td>
+                  </tr>
+                  
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- Payment -->
+          <div class="card border-dark mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <h3 class="h6">Payment Method</h3>
+                  <p>{{ payment.payment_method }} <br>
+                  Total: $ {{ cart.total_price }}  <span class="badge bg-success rounded-pill">PAID</span></p>
+                </div>
+                <div class="col-lg-6">
+                  <h3 class="h6">Billing address</h3>
+                  <address>
+                    <strong>{{ shipping.full_name }}</strong><br>
+                    {{ shipping.address1 }}<br> {{ shipping.address2 }}
+                    {{ shipping.city }} , {{ shipping.state }}<br>
+                    <abbr title="Phone"></abbr> {{ shipping.zip_code }}
+                  </address>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+      </div>
+
+
+
+
+{% endblock  %}

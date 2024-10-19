@@ -1,0 +1,87 @@
+{% extends "./base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="text-center container-fluid banner">
+
+  <img src="https://docexamplebucket1980.s3.eu-north-1.amazonaws.com/images/banner.webp">
+
+
+    <div class="row py-lg-5" >
+      
+        <div class="col-lg-6 col-md-8 mx-auto">
+          
+
+            <h2> FRAGRANCES THAT TAKE YOU PLACES </h2>
+
+
+            <br>
+            
+
+            <p class="lead text-muted">
+
+            NATURAL. FRAGRANT. EXOTIC
+
+            </p>
+
+
+            <br>
+    
+            <a href="{% url 'register' %}" style="background-color:#B17457;" class="btn text-white my-2"> <i class="fa fa-user-plus" aria-hidden="true"></i> &nbsp; Create an account </a>
+            
+            
+        </div>
+    
+    </div>
+
+
+</section>
+
+<div class="album py-5">
+        
+    <div class="container">
+
+      <div class="pb-3 h4"> ALL PRODUCTS </div>
+
+
+      <hr>
+
+      <br>
+      
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+        {% for product in products %}
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <a href="{{ product.get_absolute_url }}"><img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}"></a>
+            <div class="card-body" style="background-color: #FBF3D5;">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none" style="color: #A94438;" href="{{ product.get_absolute_url }}">{{ product.title | capfirst }}</a>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 style="color: #A94438; ml-3"> ${{ product.price }} </h5> <p>
+                  <a class="text-dark text-bold text-decoration-none" href="{{ product.get_absolute_url }}"><i class="fa fa-shopping-cart cart-item" aria-hidden="true"></i></a> 
+                </p>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+{% endblock  %}

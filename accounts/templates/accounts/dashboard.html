@@ -1,0 +1,82 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body>
+
+    
+
+    <br><br>
+
+    <div class="container col-md-6 d-flex shadow-md p-5 form-layout card">
+
+    <br> <br>
+    
+    
+    <h1 class="text-muted" style="margin-right: 10px; "> <i class="fa fa-tachometer fa-2x" style="margin-left: 20px;" aria-hidden="true"></i> &nbsp; Dashboard {{ user.username }} </h1> 
+      
+    </div>
+    <br>
+
+    <br>
+        
+    <div class="container col-md-6 d-flex shadow-md p-5 form-layout card">
+    
+        <h1> Track your orders </h1>
+        
+        <hr>
+
+        <p>See your order details</p>
+
+        <br>
+
+        <a class="btn navbar-btn text-white" style="width: 50%; border-radius: 3px; background-color: #A67B5B;" type="button"  href="{% url 'my_orders' %}"> My Orders </a>
+    
+    
+        </div>
+
+        <br>
+
+        <div class="container col-md-6 shadow-md p-5 form-layout card">
+    
+            <h1> Manage your account </h1>
+            
+            <hr>
+
+            <p>Update or delete your account</p>
+
+            <a class="btn navbar-btn text-white" style="width: 50%; border-radius: 3px; background-color: #A67B5B;" type="button"  href="{% url 'update_profile' %}"> Profile </a>
+
+            <br>
+
+            <a class="btn navbar-btn text-white" style="width: 50%; border-radius: 3px; background-color: #A02334;" type="button"  href="{% url 'delete_user' %}"> Delete your account </a>
+        
+        
+            </div>
+
+            <br>
+
+            <div class="container col-md-6 shadow-md p-5 form-layout card">
+    
+                <h1> Billing Address </h1>
+                
+                <hr>
+    
+                <p>Enter your billing address</p>
+    
+                <a class="btn navbar-btn text-white" style="width: 50%; border-radius: 3px; background-color: #A67B5B;" type="button"  href="{% url 'shipping_address' %}"> Billing Address </a>
+    
+                <br>
+    
+                </div>
+
+                <br>
+
+</body>
+
+{% endblock %}
+

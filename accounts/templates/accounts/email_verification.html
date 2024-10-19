@@ -1,0 +1,15 @@
+{% autoescape off %}
+
+
+Hello {{user.username}},
+
+You registered an account on Aroma - Fragrance, before being able to use your account you need to verify that this is your email address by clicking here: https://{{domain}}{% url 'email_verification' uidb64=uid token=token %}
+
+Kind Regards
+
+
+
+
+
+
+{% endautoescape %}
