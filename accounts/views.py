@@ -176,7 +176,7 @@ def shipping_address(request):
              shipping_user = form.save(commit=False)
              shipping_user.user = request.user
              shipping_user.save()
-             return redirect('dashboard')
+             return redirect('checkout')
             
 
     context = {'form': form}
@@ -188,10 +188,8 @@ def shipping_address(request):
 @login_required(login_url='login')
 def my_orders(request):
 
-    
-    try:
+     try:
 
-      
       cart = Cart(request)
 
       total_price = cart.total_price()
