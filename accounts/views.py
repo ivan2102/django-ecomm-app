@@ -187,10 +187,7 @@ def shipping_address(request):
 # My orders
 @login_required(login_url='login')
 def my_orders(request):
-<<<<<<< HEAD
 
-=======
->>>>>>> 315ca862e6210f112ba3fdb089bfc0f451f0008f
     try:
         cart = Cart(request)
         
