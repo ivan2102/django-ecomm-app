@@ -76,7 +76,7 @@ class Cart():
            yield item
 
     def total_price(self):
-       
+
         return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
 
 

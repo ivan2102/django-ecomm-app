@@ -23,16 +23,16 @@
             <div class="card-body">
               <div class="mb-3 d-flex justify-content-between">
                 <div>
-                 
-                  <span class="me-3">Order Date : {% now "Y-m-d" %}  </p> <br>
                   
-                  <span class="badge rounded-pill bg-info">SHIPPING</span>
+                  <span class="me-3 text-dark">Order Date : {% now "Y-m-d" %}  </p> <br>
+                  
                 </div>
                 <div class="d-flex">
                  
-                 
+                  
                 </div>
               </div>
+              
               <table class="table table-striped table-hover table-bordered">
                 <thead>
                   <tr>
@@ -42,6 +42,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                 
                     {% for order in orders %}
                   <tr>
                     <td>
@@ -57,17 +58,14 @@
                       </div>
                     </td>
                     <td style="text-align: center;">{{ order.quantity }}</td>
-                    <td>${{ order.price }}</td>
+                    <td>$ {{ order.price }}</td>
                    
                   </tr>
+                  
                   {% endfor %}
+                  
                 </tbody>
                 <tfoot>
-                
-                  <tr class="fw-bold">
-                    <td colspan="2">TOTAL</td>
-                    <td>$ {{ cart.total_price }} </td>
-                  </tr>
                   
                 </tfoot>
               </table>
@@ -79,18 +77,22 @@
               <div class="row">
                 <div class="col-lg-6">
                   <h3 class="h6">Payment Method</h3>
-                  <p>{{ payment.payment_method }} <br>
-                  Total: $ {{ cart.total_price }}  <span class="badge bg-success rounded-pill">PAID</span></p>
+                  <span> Credit Card</span><br>
+                  <span> Cash on Delivery</span>
+                  
                 </div>
+                
                 <div class="col-lg-6">
                   <h3 class="h6">Billing address</h3>
                   <address>
                     <strong>{{ shipping.full_name }}</strong><br>
-                    {{ shipping.address1 }}<br> {{ shipping.address2 }}
-                    {{ shipping.city }} , {{ shipping.state }}<br>
-                    <abbr title="Phone"></abbr> {{ shipping.zip_code }}
+                    {{ shipping.address1 }}<br> 
+                    {{ shipping.address2 }}<br>
+                    {{ shipping.zip_code }} , {{ shipping.city }}<br> 
+                    <abbr title="Phone"></abbr> {{ shipping.state }}
                   </address>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -99,8 +101,7 @@
       </div>
     </div>
       </div>
-
-
+      
 
 
 {% endblock  %}

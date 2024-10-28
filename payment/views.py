@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import ShippingAddress, Order, OrderItem
 from cart.cart import Cart
 from django.http import JsonResponse
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+import datetime
+
 
 # Create your views here.
 
@@ -30,7 +34,7 @@ def checkout(request):
    
 def complete_order(request):
     if request.POST.get('action') == 'post':
-
+           
         name = request.POST.get('name')
         email = request.POST.get('email')
         address1 = request.POST.get('address1')
@@ -42,7 +46,7 @@ def complete_order(request):
                             
           "\n"  + city + "\n" + state + "\n" + zipcode                
         )
-
+       
         # Shopping cart information
         cart = Cart(request)
 
@@ -57,29 +61,58 @@ def complete_order(request):
             order_id = order.pk
 
             for item in cart:
-                OrderItem.objects.create(order_id=order_id, product=item['product'], quantity=item['qty'], price=item['price'], user=request.user)
+                OrderItem.objects.create(order_id=order_id, product=item['product'], quantity=item['qty'], 
+                price=item['price'], user=request.user)
+
+        mail_subject = 'Thank you for your order'
+        message = render_to_string('payment/payment_complete.html', {
+ 
+       'user': request.user,
+       'order': order
+       
+        
+
+    })
+
+        to_email = request.user.email
+        send_email = EmailMessage(mail_subject, message, to=[to_email])
+        send_email.send()   
+       
 
         # Create order for guest users without account
-        else:
+    else:
 
-            order = Order.objects.create(full_name=name, email=email, shipping_address=shipping_address, total=total)
+            order = Order.objects.create(full_name=name, email=email, total=total, shipping_address=shipping_address)
 
             order_id = order.pk
 
+            
+           
             for item in cart:
-                OrderItem.objects.create(order_id=order_id, product=item['product'], quantity=item['quantity'], price=item['price'])
+                OrderItem.objects.create(order_id=order_id, product=item['product'], quantity=item['quantity'],
+                price=item['price'])
 
+           
 
-        order_success = True
-        response = JsonResponse({'success': order_success})
-        return response
-    
+       
+    mail_subject = 'Thank you for your order'
+    message = render_to_string('payment/payment_complete.html', {
 
+       'user': request.user,
+       'order': order
+       
         
 
+    })
 
-
-
+    to_email = request.user.email
+    send_email = EmailMessage(mail_subject, message, to=[to_email])
+    send_email.send()
+          
+            
+    order_success = True
+    response = JsonResponse({'success': order_success })
+    return response
     
 
 def payment_success(request):

@@ -28,6 +28,7 @@ class Order(models.Model):
     email = models.EmailField(max_length=250)
     total = models.DecimalField(max_digits=8, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
     def __str__(self):
         return 'Order - #' + str(self.id)

@@ -176,7 +176,7 @@ def shipping_address(request):
              shipping_user = form.save(commit=False)
              shipping_user.user = request.user
              shipping_user.save()
-             return redirect('dashboard')
+             return redirect('checkout')
             
 
     context = {'form': form}
@@ -188,24 +188,28 @@ def shipping_address(request):
 @login_required(login_url='login')
 def my_orders(request):
 
-    
     try:
-
-      
-      cart = Cart(request)
-
-      total_price = cart.total_price()
-
-      request.session['total_price'] = str(total_price)
+        cart = Cart(request)
         
-      orders = OrderItem.objects.filter(user=request.user)
-      shipping = ShippingAddress.objects.get(user=request.user.id)
-        
-        
-      context = { 'orders': orders, 'shipping': shipping, 'cart': cart, 'total_price': total_price }
+        # Calculate total price
+        total_price = cart.total_price()  # Get the calculated total price
 
-      return render(request, 'accounts/my_orders.html', context)
-    
+        request.session['total_price'] = str(total_price)
+ 
+        # Get the other necessary data
+        orders = OrderItem.objects.filter(user=request.user)
+        shipping = ShippingAddress.objects.get(user=request.user.id)
+ 
+        # Pass the total price and other data to the context
+        context = { 
+            'orders': orders, 
+            'shipping': shipping, 
+            'cart': cart, 
+            'total_price': total_price  # Pass total_price to the template
+        }
+ 
+        return render(request, 'accounts/my_orders.html', context)
+ 
     except Exception as e:
         print(f"Error: {e}")
         return render(request, 'accounts/my_orders.html')
